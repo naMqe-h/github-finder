@@ -1,10 +1,17 @@
-import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom'
+import Navbar from './components/layout/Navbar';
 
 function App() {
   return (
-    <div className="bg-purple-500">
-      app
-    </div>
+    <BrowserRouter>
+      <div className="flex flex-col justify-between h-screen">
+        <Navbar />
+
+        <main>
+          Content
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
