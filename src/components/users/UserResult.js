@@ -1,13 +1,9 @@
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import UserItem from "./UserItem"
 import GithubContext from "../../context/github/GithubContext"
 
 export default function UserResult() {
-    const { users, loading, fetchUsers } = useContext(GithubContext)
-
-    useEffect(() => {
-        fetchUsers()
-    }, [])
+    const { users, loading } = useContext(GithubContext)
 
     return !loading ? (
         <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
