@@ -7,6 +7,7 @@ import Navbar from './components/layout/Navbar'
 import Alert from './components/layout/Alert'
 import { GithubProvider } from './context/github/GithubContext'
 import { AlertProvider } from './context/alert/AlertContext'
+import User from './pages/User'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
+                <Route path='/user/:login' element={<User />} />
                 <Route path='/*' element={<NotFound />} />
               </Routes>
             </main>
