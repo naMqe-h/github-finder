@@ -3,13 +3,15 @@ import { useEffect, useContext } from "react"
 import { Link } from 'react-router-dom'
 import GithubContext from "../context/github/GithubContext"
 import { useParams } from "react-router-dom"
+import RepoList from '../components/repos/RepoList'
 
 export default function User() {
-    const { getUser, user, loading } = useContext(GithubContext)
+    const { getUser, user, loading, getUserRepos, repos } = useContext(GithubContext)
     const { login } = useParams()
 
     useEffect(() => {
         getUser(login)
+        getUserRepos(login)
     }, [])
 
     const {
@@ -138,6 +140,8 @@ export default function User() {
                         <div className="stat-value pr-5 text-3xl md:text-4xl">{public_gists}</div>
                     </div>
                 </div>
+
+                <RepoList repos={repos}/>
             </div>
         </>
     )
