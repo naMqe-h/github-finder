@@ -1,18 +1,23 @@
-import { FaCode, FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa'
+import { FaCode, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa'
 import { useEffect, useContext } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import GithubContext from "../context/github/GithubContext"
-import { useParams } from "react-router-dom"
 import RepoList from '../components/repos/RepoList'
+import { getUserAndRepos } from '../context/github/GithubActions'
 
 export default function User() {
-    const { getUser, user, loading, getUserRepos, repos } = useContext(GithubContext)
+    const { dispatch, user, loading, repos } = useContext(GithubContext)
     const { login } = useParams()
 
     useEffect(() => {
-        getUser(login)
-        getUserRepos(login)
-    }, [])
+        dispatch({ type: 'SET_LOADING' })
+        const getUserData = async () => {
+            const userData = await getUserAndRepos(login)
+            dispatch({ type: 'GET_USER_AND_REPOS', payload: userData })
+        }
+
+        getUserData()
+    }, [dispatch, login])
 
     const {
         name,
